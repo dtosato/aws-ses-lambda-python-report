@@ -1,0 +1,16 @@
+{
+  "name": "aws-ses-lambda-python-report",
+  "description": "Code sample to send a scheduled email python report using AWS Lambda and SES services",
+  "version": "0.0.1",
+  "author": "Diego Tosato",
+  "license": "MIT",
+  "dependencies": {},
+  "devDependencies": {
+    "serverless-python-requirements": "5.0.0"
+  },
+  "scripts": {},
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/dtosato/aws-ses-lambda-python-report"
+  }
+}

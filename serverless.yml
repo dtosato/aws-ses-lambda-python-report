@@ -1,0 +1,54 @@
+service: aws-ses-lambda-python-report
+
+custom:
+  stage: dev
+  pythonRequirements:
+    slim: true
+    zip: true      
+
+provider:
+  name: aws
+  runtime: python3.7
+  region: aws_region
+  stage: ${self:custom.stage}
+  memorySize: 512
+  timeout: 30
+  iamRoleStatements:
+    - Effect: "Allow"
+      Action:
+        - "ses:SendEmail"
+        - "ses:SendRawEmail"
+      Resource: "*" 
+
+plugins:
+  - serverless-python-requirements
+
+functions:
+  aws-ses-lambda-python-report:
+    handler: lambda_function.lambda_handler  
+    name: aws-ses-lambda-python-report
+    description: Code sample to send a scheduled email python report using AWS Lambda and SES services
+    environment:
+      SENDER: sender@email
+      RECIPIENT: recipient@email
+      AWS_REGION: aws_region
+      SUBJECT: email_subject         
+      CHARSET: UTF-8
+    events:
+      - schedule: 
+        rate: rate(30 days)
+        enabled: true  
+
+package:
+  exclude:
+    - .git/**
+    - .serverless/**
+    - .serverless_plugins/**
+    - node_modules/**
+    - .cache/**
+    - .venv/**
+    - __pycache__/**
+    - .pytest_cache/**
+    - .gitignore
+    - .gitattributes   
+    - .env     
