@@ -26,7 +26,20 @@ def analysis1():
     return base64.b64encode(graph.getvalue()).decode('UTF-8')
 ```
 
-and encode the result into a base64 image to avoid the usage the read-only filesystem of AWS lambda. Then the encoded string can be embedded into a simple html report.
+and encode the result into a base64 image to avoid the usage the read-only filesystem of AWS lambda. Then the encoded string can be embedded into a simple html report as the following
+
+```html
+<html>
+<head></head>
+<body>
+<h1>Report test</h1>
+<h2>Analysis 1</h2>
+<img src="data:image/png;base64,{graph}"/>
+</body>
+</html>
+```
+
+replacing the `{graph}` placeholder with the base64 string.
 
 ## Pre-requisites
 
